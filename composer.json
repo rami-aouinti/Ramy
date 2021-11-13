@@ -1,5 +1,5 @@
 {
-	"name": "dimadeush/docker-apache-php-symfony",
+	"name": "rami/ramy-world",
 	"type": "project",
 	"description": "Docker symfony environment",
 	"keywords": [
@@ -11,14 +11,14 @@
 		"MySQL",
 		"RabbitMQ"
 	],
-	"homepage": "https://github.com/dimadeush/docker-apache-php-symfony",
+	"homepage": "https://github.com/rami-aouinti/Ramy",
 	"version": "0.0.0",
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Dmitriy Kravtsov",
-			"email": "dmitriy.kravtsov@systemsdk.com",
-			"homepage": "https://github.com/dimadeush",
+			"name": "Mohamed Rami Aouinti",
+			"email": "rami.aouinti@gmail.com",
+			"homepage": "https://github.com/rami-aouinti",
 			"role": "Developer"
 		}
 	],
