@@ -77,10 +77,10 @@
                 {{ include('layout/profile.html.twig') }}
             {% else %}
                 <li class="nav-item">
-                    <a href="index3.html" class="nav-link">Login</a>
+                    <a href="{{ path('app_login') }}" class="nav-link">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index3.html" class="nav-link">Register</a>
+                    <a href="{{ path('user_registration') }}" class="nav-link">Register</a>
                 </li>
             {% endif %}
         </ul>
