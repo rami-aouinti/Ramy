@@ -107,6 +107,9 @@ composer-install:
 composer-update:
 	@make exec-bash cmd="COMPOSER_MEMORY_LIMIT=-1 composer update"
 
+prepare:
+	@make exec-bash cmd="COMPOSER_MEMORY_LIMIT=-1 composer prepare"
+
 info:
 	@make exec cmd="bin/console --version"
 	@make exec cmd="php --version"

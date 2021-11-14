@@ -32,10 +32,10 @@
 		"ext-pdo": "*",
 		"ext-pdo_mysql": "*",
 		"doctrine/annotations": "^1.13",
+		"doctrine/dbal": "2.*",
 		"doctrine/doctrine-bundle": "^2.4",
 		"doctrine/doctrine-migrations-bundle": "^3.1",
 		"doctrine/orm": "^2.10",
-		"doctrine/dbal": "2.*",
 		"dukecity/command-scheduler-bundle": "^4.0",
 		"sensio/framework-extra-bundle": "^6.2",
 		"symfony/apache-pack": "^1.0",
@@ -58,9 +58,10 @@
 		"symfony/property-access": "5.3.*",
 		"symfony/property-info": "5.3.*",
 		"symfony/proxy-manager-bridge": "5.3.*",
-		"symfony/runtime": "5.3.*",
 		"symfony/routing": "5.3.*",
+		"symfony/runtime": "5.3.*",
 		"symfony/security-bundle": "5.3.*",
+		"symfony/security-csrf": "5.3.*",
 		"symfony/serializer": "5.3.*",
 		"symfony/translation": "5.3.*",
 		"symfony/twig-bundle": "5.3.*",
@@ -131,6 +132,18 @@
 	},
 	"prefer-stable": true,
 	"scripts": {
+		"prepare-test": [
+			"php bin/console doctrine:database:drop --if-exists --force --env=test",
+			"php bin/console doctrine:database:create --env=test",
+			"php bin/console doctrine:schema:update --force --env=test",
+			"php bin/console doctrine:fixtures:load -n --env=test"
+		],
+		"prepare": [
+			"php bin/console doctrine:database:drop --if-exists --force",
+			"php bin/console doctrine:database:create",
+			"php bin/console doctrine:schema:update --force",
+			"php bin/console doctrine:fixtures:load -n"
+		],
 		"post-install-cmd": [
 			"if test -d vendor/symfony/requirements-checker; then ./vendor/bin/requirements-checker; fi",
 			"if test -d vendor/bamarni/composer-bin-plugin; then composer bin all install; fi",
