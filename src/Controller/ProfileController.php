@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 use App\Repository\ProfileRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,13 +16,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     #[Route('/', name: 'profile_index', methods: ['GET','POST'])]
-    public function index(Request $request, ProfileRepository $profileRepository): Response
+    public function index(Request $request, ProfileRepository $profileRepository, FileUploader $fileUploader): Response
     {
         $profile = $profileRepository->find($this->getUser()->getId());
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $brochureFile */
+            $brochureFile = $form->get('image')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile);
+                $profile->setImage($brochureFileName);
+            }
+
+            $this->getDoctrine()->getManager()->persist($profile);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);

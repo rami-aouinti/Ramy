@@ -3,7 +3,7 @@ framework:
     secret: '%env(APP_SECRET)%'
     csrf_protection: ~
     http_method_override: false
-    default_locale: '%locale%'
+    default_locale: de
 
     translator:
         default_path: '%kernel.project_dir%/translations'

@@ -1,20 +1,36 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set route_params = app.request.attributes.get('_route_params') %}
+{% set params = route_params|merge(app.request.query.all) %}
+{% set applocales=locales|split('|') %}
+
+{% if app.request.locale == 'en' %}
+    {% set flag = 'us' %}
+{% elseif app.request.locale == 'ar'  %}
+    {% set flag = 'tn' %}
+{% else %}
+    {% set flag = app.request.locale %}
+{% endif %}
+
+
 <!-- Language Dropdown Menu -->
 <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="flag-icon flag-icon-us"></i>
+        <i class="flag-icon flag-icon-{{ flag }}"></i>
     </a>
     <div class="dropdown-menu dropdown-menu-right p-0">
-        <a href="#" class="dropdown-item active">
-            <i class="flag-icon flag-icon-us mr-2"></i> English
-        </a>
-        <a href="#" class="dropdown-item">
-            <i class="flag-icon flag-icon-de mr-2"></i> German
-        </a>
-        <a href="#" class="dropdown-item">
-            <i class="flag-icon flag-icon-fr mr-2"></i> French
-        </a>
-        <a href="#" class="dropdown-item">
-            <i class="flag-icon flag-icon-es mr-2"></i> Spanish
-        </a>
+        {% for locale in applocales %}
+            {% if locale != app.request.locale %}
+                {% if locale == 'en' %}
+                    {% set flag = 'us' %}
+                {% elseif locale == 'ar'  %}
+                    {% set flag = 'tn' %}
+                {% else %}
+                    {% set flag = locale %}
+                {% endif %}
+                <a class="dropdown-item {{ locale }}" href="{{ path(route, params|merge({ _locale: locale })) }}">
+                    <i class="flag-icon flag-icon-{{ flag }} mr-2"></i> {{ locale }}
+                </a>
+            {% endif %}
+        {% endfor %}
     </div>
 </li>

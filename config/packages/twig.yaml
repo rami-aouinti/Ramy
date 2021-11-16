@@ -1,5 +1,8 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        locales: 'es|ar|de|fr|en'
+        data: '@App\Service\LayoutService'
 
 when@test:
     twig:
