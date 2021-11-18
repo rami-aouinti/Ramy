@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\ProfileRepository;
@@ -15,27 +17,27 @@ class Profile
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $firstname;
+    private ?string $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $lastname;
+    private ?string $lastname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $image;
+    private ?string $image;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="profile", cascade={"persist", "remove"})
      */
-    private $user;
+    private ?User $user;
 
     public function getId(): ?int
     {

@@ -3,6 +3,7 @@ twig:
     globals:
         locales: 'es|ar|de|fr|en'
         data: '@App\Service\LayoutService'
+        offices: '@App\Service\RoleService'
 
 when@test:
     twig:

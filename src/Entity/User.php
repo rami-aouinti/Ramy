@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,38 +21,51 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\OneToOne(targetEntity=Profile::class, mappedBy="user", cascade={"persist", "remove"})
      */
-    private $profile;
+    private ?Profile $profile;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
-    private $githubId;
+    private mixed $githubId;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
-    private $googleId;
+    private mixed $googleId;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Office::class, inversedBy="users")
+     */
+    public $office;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->office = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -197,5 +214,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGoogleId($googleId): void
     {
         $this->googleId = $googleId;
+    }
+
+    /**
+     * @return Collection|Office[]
+     */
+    public function getOffice(): Collection
+    {
+        return $this->office;
+    }
+
+    public function addOffice(Office $office): self
+    {
+        if (!$this->office->contains($office)) {
+            $this->office[] = $office;
+        }
+
+        return $this;
+    }
+
+    public function removeOffice(Office $office): self
+    {
+        $this->office->removeElement($office);
+
+        return $this;
     }
 }
