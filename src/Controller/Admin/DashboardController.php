@@ -2,7 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Conversation;
+use App\Entity\Message;
 use App\Entity\Office;
+use App\Entity\Participant;
 use App\Entity\Role;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -42,6 +45,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
         yield MenuItem::linkToCrud('Offices', 'fa fa-user', Office::class);
         yield MenuItem::linkToCrud('Roles', 'fa fa-user', Role::class);
+        yield MenuItem::linkToCrud('Participant', 'fa fa-user', Participant::class);
+        yield MenuItem::linkToCrud('Message', 'fa fa-user', Message::class);
+        yield MenuItem::linkToCrud('Conversation', 'fa fa-user', Conversation::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 

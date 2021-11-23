@@ -1,5 +1,5 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-dark">
-    <div class="container">
+    <div class="container-fluid">
         <a href="{{ path('home') }}" class="navbar-brand">
             <img src="{{ asset('images/logo.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">{{ data.title|trans }}</span>
@@ -13,7 +13,10 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="{{ path('home') }}" class="nav-link">Home</a>
+                    <a href="{{ path('skeleton') }}" class="nav-link">Courant Democrate</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('email') }}" class="nav-link">Email</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Contact</a>

@@ -8,7 +8,6 @@
         <div class="content-header">
 
         </div>
-        <!-- /.content-header -->
 
         <!-- Main content -->
         <div class="content">
@@ -21,7 +20,7 @@
 
                                 <p class="card-text">
                                     {% for user in users %}
-                                        <li> {{ user.email }}</li>
+                                    {{ user.email }}
                                     {% endfor %}
                                 </p>
 

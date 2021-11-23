@@ -31,6 +31,7 @@ class UserCrudController extends AbstractCrudController
     {
         $field = [
             TextField::new('email'),
+            TextField::new('password'),
             AssociationField::new('office')->formatValue(function ($value, $entity) {
                 $str = $entity->getOffice()[0];
                 for ($i = 1; $i < $entity->getOffice()->count(); $i++) {
